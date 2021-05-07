@@ -1,0 +1,49 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateTasksTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('tasks', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('CASCADE');
+
+            $table->foreignId('board_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('CASCADE');
+
+            $table->foreignId('status_id')
+                ->nullable()
+                ->constrained('task_statuses')
+                ->onDelete('CASCADE');
+
+            $table->string('description');
+            $table->integer('order')->default(1);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('tasks');
+    }
+}

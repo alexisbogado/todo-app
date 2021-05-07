@@ -1,0 +1,246 @@
+@import 'variables'
+@import 'mixins'
+
+*,
+::after,
+::before
+    box-sizing: border-box
+
+html
+    line-height: 1.5
+    -webkit-text-size-adjust: 100%
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji
+    font-size: 16px
+
+body
+    @include no-margin
+    background: #121212
+    color: $white
+
+.antialiased
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+
+.full-width
+    width: 100%
+
+.container
+    @extend .full-width
+    padding: 30px
+
+.card
+    @include rounded
+    padding: 20px
+    background: #1e1e1e
+    text-decoration: none
+
+    &.card__light
+        background: #313131
+
+    &.card__hover:hover
+        opacity: .7
+
+    &.card__separation
+        margin-bottom: 10px
+    
+    & .card--ghost
+        opacity: .5
+        background: #000
+
+h1,
+h3,
+p
+    @include no-margin
+
+a
+    color: $white
+
+    &:hover
+        opacity: .85
+
+.separator
+    @extend .full-width
+    height: 15px
+
+.form
+    display: grid
+    gap: 15px
+
+    & .form__group *
+        @extend .d-block
+
+    & label
+        margin-bottom: 5px
+
+    & .form__input
+        @include rounded
+        @include no-border
+        padding: 10px
+        outline: none
+        background: $white
+
+        &:focus
+            box-shadow: 0 0 0 3px rgb(0, 123, 255, .3)
+
+        &.form__input--invalid
+            color: $white
+            background: $red
+
+            &:focus
+                box-shadow: 0 0 0 3px rgb(255, 0, 0, .3)
+
+    & .form__input--invalid__message
+        color: $red
+        font-size: 12px
+
+.mx-auto
+    margin-left: auto
+    margin-right: auto
+
+.button
+    @include rounded
+    @include no-border
+    cursor: pointer
+    padding: 10px
+    color: $white
+    background: $blue
+    font-size: 16px
+    text-decoration: none
+
+    &:not(:disabled):hover
+        background: $blue-hover
+
+    &.button__small
+        @extend .text-small
+        padding: 7px
+
+    &.button__red
+        background: $red
+
+        &:not(:disabled):hover
+            background: $red-hover
+
+    &.button__transparent
+        background: transparent
+
+        &:not(:disabled):hover
+            background: rgba(255, 255, 255, .1)
+
+.align-items-center
+    align-items: center
+
+.align-items-top
+    align-items: start
+
+.d-flex
+    display: flex
+
+    &.d-flex--wrap
+        flex-wrap: wrap
+    
+.task-categories
+    @extend .full-width
+    position: absolute
+    left: 0
+    overflow-x: auto
+
+.task-list
+    @extend .d-flex
+    gap: 15px
+    min-width: 1200px
+    padding: 0 10px 40px 10px
+    justify-content: center
+
+    & .task-list--card
+        position: relative
+        width: 400px
+        min-height: 650px
+
+.tasks
+    overflow-y: auto
+    height: 495px
+    padding: 5px
+
+.d-block
+    display: block
+
+    &.d-block--right
+        margin-left: auto
+        margin-right: 0
+
+    &.d-block--left
+        margin-left: 0
+        margin-right: auto
+
+*:disabled
+    opacity: .7
+    cursor: not-allowed
+    color: $white
+
+.d-grid
+    display: grid
+    grid-gap: 10px
+
+.text-small
+    font-size: 14px
+
+.text-center
+    text-align: center
+
+.modal-wrapper
+    @extend .full-width
+    position: absolute
+    height: 100%
+    left: 0
+    top: 0
+    background: rgb(48, 48, 48, .9)
+    z-index: 1
+
+    & .card
+        margin: 30px auto
+
+.modal-buttons
+    gap: 10px
+    justify-content: flex-end
+
+.m-auto
+    margin: auto auto
+
+.loading-icon
+    font-size: 5em
+    animation: rotate 2s linear infinite
+
+textarea
+    resize: vertical
+
+.cursor-pointer
+    cursor: pointer
+
+@media (min-width: 768px)
+    .container
+        width: 720px
+
+    .d-grid
+        grid-template-columns: repeat(2, 1fr)
+
+@media (min-width: 992px)
+    .container
+        width: 960px
+        
+    .d-grid
+        grid-template-columns: repeat(3, 1fr)
+
+@media (min-width: 1200px)
+    .container
+        width: 1140px
+
+@media (min-width: 1400px)
+    .container
+        width: 1320px
+
+@keyframes rotate
+    from
+        transform: rotate(0)
+    to
+        transform: rotate(360deg)
+
